@@ -10,23 +10,61 @@ namespace ConsoleCalculator
     {
         static void Main(string[] args)
         {
-            
+            Console.WriteLine(Calculate(args));
         }
 
-        private static double[] ParserStringToInt(String[] rows, int size)
+
+        private static double Calculate(string[] rows)
         {
-            double number = 0;
-            double[] numbers = new double[size];
-            foreach(var row in rows)
+            string[] operations = { "+", "-", "*", "/" };
+            double param1 = 0;
+            double param2 = 0;
+            double result = 0;
+            if (rows.Length == 3)
             {
-                if(double)
+                if (double.TryParse(rows[0], out param1) && double.TryParse(rows[2], out param2) &&
+                    operations.Contains(rows[1]))
+                {
+                    switch (rows[1])
+                    {
+                        case "+":
+                            {
+                                result = param1 + param2;
+                                break;
+                            }
+                        case "-":
+                            {
+                                result = param1 - param2;
+                                break;
+                            }
+                        case "*":
+                            {
+                                result = param1 * param2;
+                                break;
+                            }
+                        case "/":
+                            {
+                                if (param2 != 0)
+                                {
+                                    result = param1 / param2;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Делить на ноль нельзя.");
+                                    result = 0;
+                                }
+                                break;
+                            }
+                        default:
+                            {
+                                Console.WriteLine("Операция не определена.");
+                                result = 0;
+                                break;
+                            }
+                    }
+                }
             }
-
-            return numbers;
+            return result;
         }
-
-        private 
-
-        
     }
 }
