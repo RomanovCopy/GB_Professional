@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleCalculator
 {
+    /*
+     Написать программу-калькулятор, вычисляющую выражения вида a + b, a - b, a / b, a * b, 
+    введенные из командной строки, и выводящую результат выполнения на экран.
+     */
+
     internal class Program
     {
         static void Main(string[] args)
@@ -50,7 +55,7 @@ namespace ConsoleCalculator
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Делить на ноль нельзя.");
+                                    Console.WriteLine("Делить на 0 нельзя.");
                                     result = 0;
                                 }
                                 break;
