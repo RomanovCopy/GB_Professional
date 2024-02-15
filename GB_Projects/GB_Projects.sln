@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GB_Projects", "GB_Projects\GB_Projects.csproj", "{AE7B3B64-18F4-454F-8218-34DB602E2785}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorting2DArray", "Sorting2DArray\Sorting2DArray.csproj", "{43D1E1C9-3ACA-4A19-862E-C09701FEDC4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AE7B3B64-18F4-454F-8218-34DB602E2785}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE7B3B64-18F4-454F-8218-34DB602E2785}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE7B3B64-18F4-454F-8218-34DB602E2785}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43D1E1C9-3ACA-4A19-862E-C09701FEDC4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43D1E1C9-3ACA-4A19-862E-C09701FEDC4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43D1E1C9-3ACA-4A19-862E-C09701FEDC4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43D1E1C9-3ACA-4A19-862E-C09701FEDC4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
