@@ -26,13 +26,35 @@ namespace Sorting2DArray
     {
         static void Main(string[] args)
         {
-
+            int[,] array = new int[,] { { 7, 3, 2 }, { 4, 9, 6 }, { 1, 8, 5 } };
+            Sorting2DArray(array);
         }
 
         private static int[,] Sorting2DArray(int[,] array)
         {
             int rows = array.GetLength(0);
             int coils = array.GetLength(1);
+            int index = 0;
+            int[] newArray = new int[rows * coils];
+            for(int i=0; i < rows; i++)
+            {
+                for(int j=0; j < coils; j++)
+                {
+                    newArray[index] = array[i, j];
+                    index++;
+                }
+            }
+            Array.Sort(newArray);
+            index = 0;
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < coils; j++)
+                {
+                    array[i, j] = newArray[index];
+                    index++;
+                }
+            }
+            return array;
         }
     }
 }
