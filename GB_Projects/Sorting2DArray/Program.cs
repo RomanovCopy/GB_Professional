@@ -28,6 +28,8 @@ namespace Sorting2DArray
         {
             int[,] array = new int[,] { { 7, 3, 2 }, { 4, 9, 6 }, { 1, 8, 5 } };
             Sorting2DArray(array);
+            Display(array);
+            Console.ReadKey();
         }
 
         private static int[,] Sorting2DArray(int[,] array)
@@ -55,6 +57,20 @@ namespace Sorting2DArray
                 }
             }
             return array;
+        }
+
+        private static void Display(int[,] array)
+        {
+            int rows = array.GetLength(0);
+            int coils = array.GetLength(1);
+            for(int i = 0; i < rows; i++)
+            {
+                for(int j = 0; j < coils; j++)
+                {
+                    Console.Write(array[i, j]+" ");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
