@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenealogyTree
+namespace GenealogyTree.Interfaces
 {
-    internal class Program
+    internal interface IChild
     {
-        static void Main(string[] args)
-        {
-
-        }
     }
 }

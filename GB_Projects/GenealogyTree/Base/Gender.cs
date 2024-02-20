@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenealogyTree
+namespace GenealogyTree.Base
 {
-    internal class Program
+    internal enum Gender
     {
-        static void Main(string[] args)
-        {
-
-        }
+        Male,
+        Female
     }
 }

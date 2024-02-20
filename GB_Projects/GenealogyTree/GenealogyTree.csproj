@@ -43,11 +43,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\Gender.cs" />
+    <Compile Include="Base\Person.cs" />
+    <Compile Include="Interfaces\IChild.cs" />
+    <Compile Include="Interfaces\IFather.cs" />
+    <Compile Include="Interfaces\IGrandFater.cs" />
+    <Compile Include="Interfaces\IGrandMother.cs" />
+    <Compile Include="Interfaces\IMother.cs" />
+    <Compile Include="Models\Child.cs" />
+    <Compile Include="Models\Father.cs" />
+    <Compile Include="Models\GenealogyTree_Model.cs" />
+    <Compile Include="Models\GrandFather.cs" />
+    <Compile Include="Models\GrandMother.cs" />
+    <Compile Include="Models\Mother.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\GenealogyTree_View.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
