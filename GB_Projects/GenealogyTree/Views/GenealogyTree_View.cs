@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using GenealogyTree.Base;
+
 namespace GenealogyTree.Views
 {
     internal class GenealogyTree_View
@@ -35,6 +37,21 @@ namespace GenealogyTree.Views
         {
             Console.Write(newRow ? message + "\n" : message);
         }
+
+
+        public void DisplayTab(Person[] persons, string message )
+        {
+            string[] headers = { "Surname", "Name", "Gender", "Date of birth" };
+            Console.WriteLine(message);
+            Console.WriteLine(string.Join(" \t! ", headers));
+            Console.WriteLine(new string('-', 30));
+            foreach (var person in persons)
+            {
+                Console.WriteLine(person);
+            }
+        }
+
+
 
 
     }

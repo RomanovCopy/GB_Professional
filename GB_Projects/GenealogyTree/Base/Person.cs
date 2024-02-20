@@ -38,6 +38,9 @@ namespace GenealogyTree.Base
             DateOfBirth = dateOfBirth;
         }
 
-
+        public override string ToString()
+        {
+            return $"! {SurName} \t! {Name} \t! {PersonGender} \t! {DateOfBirth.ToShortDateString()} \t!";
+        }
     }
 }
