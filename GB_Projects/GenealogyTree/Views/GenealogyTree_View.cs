@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,10 +23,27 @@ namespace GenealogyTree.Views
         /// <param name="message">сообщение пользователю</param>
         /// <param name="newRow">ввод с новой строки</param>
         /// <returns>введенная строка</returns>
-        public String Input(string message, bool newRow = false)
+        public string Input(string message, bool newRow = false)
         {
             Console.Write(newRow ? message + "\n" : message);
             return Console.ReadLine();
+        }
+
+        public bool InputDateTime(out DateTime date, string message, bool newRow = false )
+        {
+            string format = "ДД-ММ-ГГГГ";
+            message = newRow ? message + format + "\n" : message + format;
+            bool ready = false;
+            date = new DateTime().Date;
+            string dateString = "";
+            while (!ready)
+            {
+                Console.WriteLine(@"Отмена ввода - 'Enter'");
+                Console.Write(message);
+                dateString = Console.ReadLine();
+                ready = DateTime.TryParse(dateString, out date) || dateString.Length == 0;
+            }
+            return ready;
         }
 
         /// <summary>

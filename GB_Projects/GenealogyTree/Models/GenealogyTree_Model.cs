@@ -21,8 +21,21 @@ namespace GenealogyTree.Models
 
         internal Person CreatePerson()
         {
-            
-            view.Display("")
+
+            view.Display("Добавление родственника.", true);
+            string name = view.Input("Имя :\t");
+            string surname = view.Input("Фамилия :\t");
+
+
+            DateTime birthDay = new DateTime(view.Input("Дата рождения(ДД.ММ.ГГГГ) :\t"));
+
+
+            string dateString = "2021-09-21";
+            DateTime date;
+            DateTime.TryParseExact(dateString, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out date);
+
+            Console.WriteLine(date.ToShortDateString());
+
         }
     }
 }
