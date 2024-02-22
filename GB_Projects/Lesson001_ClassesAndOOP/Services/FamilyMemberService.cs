@@ -52,6 +52,8 @@ namespace Lesson001_ClassesAndOOP.Services
         }
 
 
+        public FamilyMember GetSpouse(FamilyMember member) => member.Spouse;
+
 
 
     }

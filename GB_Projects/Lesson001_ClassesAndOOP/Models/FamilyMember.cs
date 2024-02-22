@@ -10,6 +10,7 @@ namespace Lesson001_ClassesAndOOP.Models
     {
         public string Name { get; set; }
         public string SurName { get; set; }
+        public FamilyMember Spouse { get; set; }
         public Gender Gender { get; set; }
         public FamilyMember Mother { get; set; }
         public FamilyMember Father { get; set; }
