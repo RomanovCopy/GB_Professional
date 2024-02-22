@@ -14,12 +14,12 @@ namespace Lesson001_ClassesAndOOP.Models
         public FamilyMember Mother { get; set; }
         public FamilyMember Father { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public DateTime DateOgDeath { get; set; }
+        public DateTime DateOfDeath { get; set; }
 
 
         public override string ToString()
         {
-            return $"Имя - {Name}\n Фамилия - {SurName}\n Дата рождения - {DateOfBirth.ToShortDateString()}\n ";
+            return $" \tИмя - \t\t\t{Name}\n \tФамилия - \t\t{SurName}\n \tДата рождения - \t{DateOfBirth.ToShortDateString()}\n\n ";
         }
     }
 }

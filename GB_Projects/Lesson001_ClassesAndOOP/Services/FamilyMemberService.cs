@@ -10,19 +10,19 @@ namespace Lesson001_ClassesAndOOP.Services
 {
     internal class FamilyMemberService
     {
-        public List<FamilyMember> Famely { get; private set; }
+        private List<FamilyMember> Family { get; set; }
 
 
         public FamilyMemberService()
         {
-            Famely = new List<FamilyMember>();
+            Family = new List<FamilyMember>();
         }
 
         public void AddPerson( params  FamilyMember[] member)
         {
             if (member != null && member.Length>0)
             {
-                Famely.AddRange(member);
+                Family.AddRange(member);
             }
         }
 
@@ -45,10 +45,10 @@ namespace Lesson001_ClassesAndOOP.Services
         }
 
 
-        public FamilyMember OldFamelyMember()
+        public FamilyMember OldFamilyMember()
         {
-            var data = Famely.Min(x => x.DateOfBirth);
-            return Famely.LastOrDefault(x=>x.DateOfBirth==data);
+            var data = Family.Min(x => x.DateOfBirth);
+            return Family.LastOrDefault(x => x.DateOfBirth == data);
         }
 
 

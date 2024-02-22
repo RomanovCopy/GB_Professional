@@ -57,7 +57,7 @@ namespace Lesson001_ClassesAndOOP
                 Console.Write(member);
             }
             Console.WriteLine();
-            Console.WriteLine( service.OldFamelyMember());
+            Console.WriteLine( service.OldFamilyMember());
 
         }
 
