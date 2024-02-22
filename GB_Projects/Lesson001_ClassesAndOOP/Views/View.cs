@@ -11,7 +11,7 @@ namespace Lesson001_ClassesAndOOP.Views
     internal class View
     {
 
-        public void GetMother(FamelyMember person)
+        public void GetMother(FamilyMember person)
         {
             
         }

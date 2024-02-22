@@ -43,11 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\FamelyMember.cs" />
+    <Compile Include="Models\FamilyMember.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\FamelyMemberService.cs" />
+    <Compile Include="Services\FamilyMemberService.cs" />
     <Compile Include="Views\View.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,17 +8,17 @@ using Lesson001_ClassesAndOOP.Models;
 
 namespace Lesson001_ClassesAndOOP.Services
 {
-    internal class FamelyMemberService
+    internal class FamilyMemberService
     {
-        public List<FamelyMember> Famely { get; private set; }
+        public List<FamilyMember> Famely { get; private set; }
 
 
-        public FamelyMemberService()
+        public FamilyMemberService()
         {
-            Famely = new List<FamelyMember>();
+            Famely = new List<FamilyMember>();
         }
 
-        public void AddPerson( params  FamelyMember[] member)
+        public void AddPerson( params  FamilyMember[] member)
         {
             if (member != null && member.Length>0)
             {
@@ -26,18 +26,18 @@ namespace Lesson001_ClassesAndOOP.Services
             }
         }
 
-        public List<FamelyMember> GetGrandFathers(FamelyMember member)
+        public List<FamilyMember> GetGrandFathers(FamilyMember member)
         {
-            List<FamelyMember> grandFathers = new List<FamelyMember>();
+            List<FamilyMember> grandFathers = new List<FamilyMember>();
             grandFathers.Add(member.Mother.Father);
             grandFathers.Add(member.Father.Father);
 
             return grandFathers;
         }
 
-        public List<FamelyMember> GetGrandMothers(FamelyMember member)
+        public List<FamilyMember> GetGrandMothers(FamilyMember member)
         {
-            List<FamelyMember> grandFathers = new List<FamelyMember>();
+            List<FamilyMember> grandFathers = new List<FamilyMember>();
             grandFathers.Add(member.Mother.Mother);
             grandFathers.Add(member.Father.Mother);
 
@@ -45,7 +45,7 @@ namespace Lesson001_ClassesAndOOP.Services
         }
 
 
-        public FamelyMember OldFamelyMember()
+        public FamilyMember OldFamelyMember()
         {
             var data = Famely.Min(x => x.DateOfBirth);
             return Famely.LastOrDefault(x=>x.DateOfBirth==data);
