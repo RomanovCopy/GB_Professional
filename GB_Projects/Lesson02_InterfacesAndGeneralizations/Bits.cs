@@ -14,7 +14,7 @@ namespace Lesson02_InterfacesAndGeneralizations
         public Bits ( long value )
         {
             Value = value;
-            size = sizeof( long ) * 8; 
+            size = sizeof( long ) * 8; //определяем количество битов в переданном числе
         }
 
         // Получение бита по индексу
@@ -29,7 +29,7 @@ namespace Lesson02_InterfacesAndGeneralizations
             this[ index ] = value;
         }
 
-        // Индексатор
+        // Индексатор способный работать с любым количеством битов( < 65 )
         public bool this[ int index ]
         {
             get
@@ -56,43 +56,21 @@ namespace Lesson02_InterfacesAndGeneralizations
             }
         }
 
-        // Явное приведение long к Bits
-        public static explicit operator Bits ( long value )
-        {
-            return new Bits( value );
-        }
+         // Явное приведение long к Bits
+       public static explicit operator Bits ( long value ) => new Bits( value );
         // Явное приведение int к Bits
-        public static explicit operator Bits ( int value )
-        {
-            return new Bits( value );
-        }
+        public static explicit operator Bits ( int value ) => new Bits( value );
         // Явное приведение byte к Bits
-        public static explicit operator Bits ( byte value )
-        {
-            return new Bits( value );
-        }
-
+        public static explicit operator Bits ( byte value ) => new Bits( value );
         // Неявное приведение Bits к long
-        public static implicit operator long ( Bits bits )
-        {
-            return bits.Value;
-        }
+        public static implicit operator long ( Bits bits ) => bits.Value;
         // Неявное приведение Bits к int
-        public static implicit operator int ( Bits bits )
-        {
-            return ( int )bits.Value;
-        }
+        public static implicit operator int ( Bits bits ) => ( int )bits.Value;
         // Неявное приведение Bits к byte
-        public static implicit operator byte ( Bits bits )
-        {
-            return ( byte )bits.Value;
-        }
+        public static implicit operator byte ( Bits bits ) => ( byte )bits.Value;
 
         //переопределенный метод для вывода значений
         //с удалением незначащих нулей
-        public override string ToString ( )
-        {
-            return Convert.ToString( Value , 2 );
-        }
+        public override string ToString ( ) => Convert.ToString( Value , 2 );
     }
 }
