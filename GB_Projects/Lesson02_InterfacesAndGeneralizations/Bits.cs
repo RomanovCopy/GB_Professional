@@ -14,7 +14,7 @@ namespace Lesson02_InterfacesAndGeneralizations
         public Bits ( long value )
         {
             Value = value;
-            size = sizeof( long ) * 8; //определяем количество битов в переданном числе
+            size = sizeof( long ) * 8; //определяем количество бит в переданном числе
         }
 
         // Получение бита по индексу
@@ -29,7 +29,7 @@ namespace Lesson02_InterfacesAndGeneralizations
             this[ index ] = value;
         }
 
-        // Индексатор способный работать с любым количеством битов( < 65 )
+        // Индексатор способный работать с любым количеством бит( < 65 )
         public bool this[ int index ]
         {
             get
