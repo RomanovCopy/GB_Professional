@@ -39,39 +39,43 @@ namespace Lesson03_Collections01
 
         private int HasExit ( int startI , int startJ , int[ , ] l )
         {
-            int row = startI;
-            int column = startJ;
-            if ( row >= 0 && row < rows && column >= 0 && column < columns && l[ row , column ] == 0 )
+            //точка за пределами лабиринта или занята
+            if ( startI < 0 || startJ < 0 || startI >= rows || startJ >= columns || l[ startI , startJ ] == 1 )
             {
-                Validate( row , column , l );
+                return allPaths.Count;
             }
+            //окончание поиска
+            if ( startI == rows - 1 || startJ == columns - 1 )
+            {
+                allPaths.Add( new Stack<Tuple<int, int>>( currentPath ) );
+                return allPaths.Count;
+            }
+            //занимаем точку
+            l[ startI , startJ ] = 1;
+            //добавление точки в маршрут
+            currentPath.Push( new Tuple<int , int>( startI , startJ ) );
+            //перемещения
+            steps++;
+            //вправо
+            HasExit( startI , startJ + 1 , l );
+            steps++;
+            //вниз
+            HasExit( startI + 1 , startJ , l );
+            steps++;
+            //влево
+            HasExit( startI , startJ - 1 , l );
+            steps++;
+            //вверх
+            HasExit( startI - 1 , startJ , l );
+            steps++;
+            //удаление точки из маршрута
+            currentPath.Pop( );
+            //освобождение точки
+            l[ startI , startJ ] = 0;
             return allPaths.Count;
         }
 
-        private void Validate(int row, int column, int[ , ]l)
-        {
-            if ( l[row,column]==0 )
-            {
-                if(row!=rows-1 && column != columns - 1 && row >= 0 && column >= 0)
-                {
-                    l[ row , column ] = 1;
-                    currentPath.Push( new Tuple<int , int>( row , column ) );
-                    Validate( row + 1 , column , l );
-                    if ( row > 0 )
-                        Validate( row - 1 , column , l );
-                    Validate( row , column + 1 , l );
-                    if ( column > 0 )
-                        Validate( row , column - 1 , l );
-                    l[ row , column ] = 0;
-                    currentPath.Pop( );
-                } else
-                {
-                    currentPath.Push( new Tuple<int , int>( row , column ) );
-                    allPaths.Add( new Stack<Tuple<int, int>>(currentPath) );
-                }
-            }
-            return;
-        }
+
 
     }
 }
