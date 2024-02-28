@@ -22,9 +22,7 @@ namespace Lesson03_Collections01
 
         static void Main ( string[ ] args )
         {
-            //new Labyrinth( labirynth1 , new Tuple<int , int>( 3 , 0 ) );
             new Labyrinth( labirynth1 , new Tuple<int , int>( 3 , 0 ) );
-
         }
     }
 }
