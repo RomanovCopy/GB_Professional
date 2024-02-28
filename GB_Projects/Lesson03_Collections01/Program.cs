@@ -13,17 +13,17 @@ namespace Lesson03_Collections01
             {1, 1, 1, 1, 1, 1, 1 },
             {1, 0, 0, 0, 0, 0, 1 },
             {1, 0, 1, 1, 1, 0, 1 },
-            {0, 0, 0, 0, 1, 0, 0 },
+            {0, 0, 0, 0, 1, 0, 2 },
             {1, 1, 0, 0, 1, 1, 1 },
-            {1, 1, 1, 0, 1, 1, 1 },
-            {1, 1, 1, 0, 1, 1, 1 }
+            {1, 1, 1, 0, 0, 0, 2 },
+            {1, 1, 1, 2, 1, 1, 1 }
         };
 
 
         static void Main ( string[ ] args )
         {
+            //new Labyrinth( labirynth1 , new Tuple<int , int>( 3 , 0 ) );
             new Labyrinth( labirynth1 , new Tuple<int , int>( 3 , 0 ) );
-            //new Labyrinth( labirynth1 , new Tuple<int , int>( 6 , 3 ) );
 
         }
     }
