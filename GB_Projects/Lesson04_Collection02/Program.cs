@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GB_Projects
+namespace Lesson04_Collection02
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main ( string[ ] args )
         {
         }
     }
