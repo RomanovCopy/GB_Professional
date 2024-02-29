@@ -67,7 +67,7 @@ namespace Lesson04_Collection02
                     if ( isLeft )
                     {
                         left++;
-                        //isLeft = false;
+                        isLeft = false;
                     } else
                     {
                         right--;

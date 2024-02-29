@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Lesson04_Collection02
 {
-    internal class Program
+    internal class Lesson04
     {
-        static void Main ( string[ ] args )
+        public Lesson04 ( )
         {
-            //new ThreeNumbersInTheArray( );
-            new Lesson04( );
+
         }
     }
 }
