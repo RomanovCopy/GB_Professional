@@ -10,8 +10,7 @@ namespace Lesson04_Collection02
     {
         static void Main ( string[ ] args )
         {
-            //new ThreeNumbersInTheArray( );
-            new Lesson04( );
+            new ThreeNumbersInTheArray( );
         }
     }
 }
