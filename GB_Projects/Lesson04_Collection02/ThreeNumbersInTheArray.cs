@@ -30,8 +30,16 @@ namespace Lesson04_Collection02
 
         public ThreeNumbersInTheArray ( )
         {
-            var l = SearchForThreeTermsBasedOnTheirAmount( array , target );
+            List<Tuple<int , int , int>> l = null;
             int count = 1;
+            l = SearchForThreeTermsBasedOnTheirAmount( array , target );
+            foreach ( var val in l )
+            {
+                Console.WriteLine( $"{count}   {val.Item1} + {val.Item2} + {val.Item3} = {val.Item1 + val.Item2 + val.Item3}" );
+                count++;
+            }
+            l = SearchForThreeTermsBasedOnTheirAmount_V02( array , target );
+            count = 1;
             foreach ( var val in l )
             {
                 Console.WriteLine( $"{count}   {val.Item1} + {val.Item2} + {val.Item3} = {val.Item1 + val.Item2 + val.Item3}" );
@@ -59,7 +67,7 @@ namespace Lesson04_Collection02
                             difference = target - v1 - v2;
                             var val3 = val2.Where( x => x <= difference && !x.Equals( v2 ) ).ToList<int>( );
                             v3 = val3.Where( x => x == difference ).FirstOrDefault( );
-                            if ( v1 + v2 + v3 == target && !list.Any( x => x.Item1 == v1 && x.Item2 == v2 && 
+                            if ( v1 + v2 + v3 == target && !list.Any( x => x.Item1 == v1 && x.Item2 == v2 &&
                             x.Item3 == v3 ) )
                             {
                                 list.Add( new Tuple<int , int , int>( v1 , v2 , v3 ) );
@@ -74,6 +82,42 @@ namespace Lesson04_Collection02
             return list;
         }
 
+        private List<Tuple<int , int , int>> SearchForThreeTermsBasedOnTheirAmount_V02 ( int[ ] array , int target )
+        {
+            List<Tuple<int , int , int>> list = new List<Tuple<int , int , int>>( );
+            var val1 = new List<int>( array.Where( x => x < target ) );
+            int v1, v2, v3, left, right, difference = 0;
+            if ( val1.Count( ) > 2 )
+            {
+                left = 1; // Изменение начального индекса на 1
+                right = val1.Count( ) - 1;
+                bool isLeft = true;
+                while ( left < right )
+                {
+                    v1 = val1[ left ];
+                    v2 = val1[ right ];
+                    difference = target - v1 - v2;
+                    bool isTargetInRegion = val1.Skip( left ) // Использование Skip с начальным индексом
+                                                  .Take( right - left ) // Использование Take с длиной сегмента
+                                                  .Contains( difference );
+                    if ( isTargetInRegion )
+                    {
+                        list.Add( new Tuple<int , int , int>( v1 , v2 , difference ) );
+                    }
+
+                    if ( isLeft )
+                    {
+                        left++;
+                        isLeft = false;
+                    } else
+                    {
+                        right--;
+                        isLeft = true;
+                    }
+                }
+            }
+            return list;
+        }
 
 
 
