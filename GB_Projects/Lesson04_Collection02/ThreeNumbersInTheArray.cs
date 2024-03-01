@@ -26,13 +26,12 @@ namespace Lesson04_Collection02
             21, 66, 48, 69, 26, 48, 23, 24, 76, 7
         };
 
-        private int target = 95;
+        private int target = 99;
 
         public ThreeNumbersInTheArray ( )
         {
-            List<Tuple<int , int , int>> l = null;
             int count = 1;
-            l = SearchForThreeTermsBasedOnTheirAmount( array , target );
+            var l = SearchForThreeTermsBasedOnTheirAmount( array , target );
             if ( l.Count == 0 )
                 Console.WriteLine( "Подходящих чисел не найдено" );
             foreach ( var val in l )
@@ -46,37 +45,46 @@ namespace Lesson04_Collection02
         private List<Tuple<int , int , int>> SearchForThreeTermsBasedOnTheirAmount ( int[ ] array , int target )
         {
             List<Tuple<int , int , int>> list = new List<Tuple<int , int , int>>( );
-            var val1 = new List<int>( array );
-            val1.Sort( );
-            bool isLeft = true;
-            int v1, v2, v3, left, right = 0;
-            if ( val1.Count( ) > 2 )
+            Array.Sort( array );
+
+            for ( int i = 0 ; i < array.Length - 2 ; i++ )
             {
-                left = 0;
-                right = val1.Count( ) - 1;
+                int left = i + 1;
+                int right = array.Length - 1;
+
                 while ( left < right )
                 {
-                    v1 = val1[ left ];
-                    v2 = val1[ right ];
-                    v3 = target - v1 - v2;
-                    bool isTargetInRegion = val1.Skip( left ).Take( right - left ).Contains( v3 ) && !(v1.Equals(v2) || v1.Equals(v3) || v2.Equals(v3));
-                    if ( isTargetInRegion && !list.Any( x => x.Item1 == v1 && x.Item2 == v2 && x.Item3 == v3 ) )
+                    int sum = array[ i ] + array[ left ] + array[ right ];
+                    if ( sum == target )
                     {
-                        list.Add( new Tuple<int , int , int>( v1 , v2 , v3 ) );
-                    }
-                    if ( isLeft )
-                    {
+                        list.Add( new Tuple<int , int , int>( array[ i ] , array[ left ] , array[ right ] ) );
+
+                        // Последующие элементы не должны быть равны array[ left ]
+                        while ( left < right && array[ left ] == array[ left + 1 ] )
+                            left++;
+                        // Последующие элементы не должны быть равны array[ right ]
+                        while ( left < right && array[ right ] == array[ right - 1 ] )
+                            right--;
+
                         left++;
-                        isLeft = false;
-                    } else
-                    {
                         right--;
-                        isLeft = true;
+                    } else if ( sum < target )
+                    {//пропускаем минимальные значения
+                        left++;
+                    } else
+                    {//пропускаем максимальные значения
+                        right--;
                     }
                 }
+
+                // Пропускаем повторяющиеся значения
+                while ( i < array.Length - 2 && array[ i ] == array[ i + 1 ] )
+                    i++;
             }
+
             return list;
         }
+
 
 
 
