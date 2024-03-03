@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Calculator_v02
 {
-    /*
-     * Данный класс контролирует ввод и оповещает о 
-     * введенном символе подписанные на него классы
-     */
+    /// <summary>
+    /// Данный класс контролирует ввод и оповещает о 
+    /// введенном символе подписанные на него классы
+    /// </summary>
     internal class KeyPressEventHandler
     {
         /// <summary>
