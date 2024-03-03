@@ -110,6 +110,7 @@ namespace Calculator_v02
             lastOperator = "+";
             bool firstValue = true;
             bool isNegative = false;
+            line = line.Replace( '.' , ',' );
             string[]numbers = Regex.Split( line , @"([-+*/])" );
             foreach (var ch in numbers )
             {
