@@ -51,10 +51,17 @@ namespace Calculator_v02
                     return v1 / v2;
                 }
             };
-            //создаем и подписываемся на событие ввода символа
+            //создаем экземляр класса ответственного за мониторинг событий
             KeyPressEventHandler handler = new( );
+            //подписываемся на событие ввода символа
             handler.KeyPressed += Handler_KeyPressed;
+            //запускаем отслеживание введенных символов
             handler.WaitingForInput( );
+        }
+
+        private decimal add(decimal v1, decimal v2 )
+        {
+            return v1 + v2;
         }
 
         /// <summary>
@@ -81,7 +88,7 @@ namespace Calculator_v02
                 Output( );
                 Line = "";
             }else if ( e.KeyInfo.Key == ConsoleKey.Delete )
-            {
+            {//получение предыдущего результата
                 if ( stack.Count > 0 )
                     Console.Write( stack.Pop( ) );
             }
@@ -124,10 +131,11 @@ namespace Calculator_v02
         /// <returns>результат выполнения: True - выполнено без ошибок; False - выполнено с ошибкой</returns>
         private bool ParseStringToDecimals ( string line , out decimal val1 , out decimal val2 , out string lastOperator )
         {
-            val1 = val2 = 0;
-            lastOperator = "+";
-            bool firstValue = true;
-            bool isNegative = false;
+            val1 = val2 = 0;//здесь присваивание для избежания ошибки
+            lastOperator = "+";//здесь присваивание для избежания ошибки
+            bool firstValue = true;//первый операнд еще не найден
+            bool isNegative = false;//отрицательный операнд
+            //приводим разделитель к системным настройкам
             if ( separator == "." )
             {
                 line = line.Replace( ',' , '.' );
@@ -140,11 +148,12 @@ namespace Calculator_v02
                 Console.WriteLine( "Выполнение операций невозможно." );
                 return false;
             }
+            //заполняем массив числами и знаками операций
             string[ ] numbers = Regex.Split( line , @"([-+*/])" );
             foreach ( var ch in numbers )
             {
                 if ( ch == "-" || ch == "+" || ch == "" )
-                {
+                {//знак текущего числа
                     lastOperator = lastOperator != "*" && lastOperator != "/" ? ch : lastOperator;
                     if ( ch == "-" )
                     {
@@ -157,7 +166,7 @@ namespace Calculator_v02
                     continue;
                 }
                 if ( firstValue )
-                {
+                {//первый операнд
                     if ( decimal.TryParse( ch , out val1 ) )
                     {
                         val1 *= isNegative ? -1 : 1;
@@ -165,7 +174,7 @@ namespace Calculator_v02
                     } else
                         return false;
                 } else
-                {
+                {//второй операнд
                     if ( decimal.TryParse( ch , out val2 ) )
                     {
                         val2 *= isNegative ? -1 : 1;
