@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
@@ -128,9 +129,10 @@ namespace Calculator_v02
         private bool ParseStringToDecimals ( string line , out decimal val1 , out decimal val2 , out string lastOperator )
         {
             val1 = val2 = 0;//здесь присваивание для избежания ошибки
-            lastOperator = "+";//здесь присваивание для избежания ошибки
+            lastOperator = "none";//здесь присваивание для избежания ошибки
             bool firstValue = true;//первый операнд еще не найден
             bool isNegative = false;//отрицательный операнд
+            line = line.Replace( " " , "" );//удаляем пробелы
             //приводим разделитель к системным настройкам
             if ( separator == "." )
             {
@@ -144,21 +146,26 @@ namespace Calculator_v02
                 Console.WriteLine( "Выполнение операций невозможно." );
                 return false;
             }
-            //заполняем массив числами и знаками операций
+            //заполняем массив числами и знаками из строки
             string[ ] numbers = Regex.Split( line , @"([-+*/])" );
-            foreach ( var ch in numbers )
+            for ( int i=0 ;i<numbers.Length ;i++ )
             {
+                var ch = numbers[ i ];
                 if ( ch == "-" || ch == "+" || ch == "" )
                 {
-                    lastOperator = lastOperator != "*" && lastOperator != "/" ? ch : lastOperator;
+                    //определяем операцию для выполнения( + или - )
+                    if ( !firstValue && lastOperator == "none" )
+                        lastOperator = ch;
+
                     //знак текущего числа
-                    if ( ch == "-" )
+                    if ( !Decimal.TryParse( numbers[i+1], out _) )
                     {
-                        isNegative = true;
+                        isNegative = numbers[ i + 1 ] == "-";
                     }
                     continue;
                 } else if ( ch == "*" || ch == "/" )
                 {
+                    //определяем операцию для выполнения( * или / )
                     lastOperator = ch;
                     continue;
                 }
