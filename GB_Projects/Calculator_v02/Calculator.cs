@@ -87,7 +87,7 @@ namespace Calculator_v02
             }else if ( e.KeyInfo.Key == ConsoleKey.Delete )
             {//получение предыдущего результата
                 if ( stack.Count > 0 )
-                    Console.Write( stack.Pop( ) );
+                    Console.WriteLine( stack.Pop( ) );
             }
         }
 
