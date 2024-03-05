@@ -59,10 +59,6 @@ namespace Calculator_v02
             handler.WaitingForInput( );
         }
 
-        private decimal add(decimal v1, decimal v2 )
-        {
-            return v1 + v2;
-        }
 
         /// <summary>
         /// обработка события ввода символа и формирование строки
@@ -153,8 +149,9 @@ namespace Calculator_v02
             foreach ( var ch in numbers )
             {
                 if ( ch == "-" || ch == "+" || ch == "" )
-                {//знак текущего числа
+                {
                     lastOperator = lastOperator != "*" && lastOperator != "/" ? ch : lastOperator;
+                    //знак текущего числа
                     if ( ch == "-" )
                     {
                         isNegative = true;
