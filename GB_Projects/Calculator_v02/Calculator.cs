@@ -14,7 +14,7 @@ namespace Calculator_v02
     {
         private readonly string Simbols = "0123456789+-*/,. ";
 
-        private readonly Stack<Decimal> stack;
+        private readonly Stack<Tuple<string , decimal , string>> stack;
 
         //делегаты для выполнения операций
         private delegate decimal Function ( decimal val1 , decimal val2 );
@@ -37,21 +37,11 @@ namespace Calculator_v02
             //Определяем разделитель для данной системы
             separator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
 
-            stack = new Stack<decimal>( );
+            stack = new Stack<Tuple<string , decimal , string>>( );
             Addition = ( v1 , v2 ) => v1 + v2;
             Subtraction = ( v1 , v2 ) => v1 - v2;
             Multiplication = ( v1 , v2 ) => v1 * v2;
-            Division = ( v1 , v2 ) =>
-            {
-                if ( v2 == 0 )
-                {
-                    Console.Write( "  Ошибка!!! Деление на " );
-                    return 0;
-                } else
-                {
-                    return v1 / v2;
-                }
-            };
+            Division = ( v1 , v2 ) => v1 / v2;
             //создаем экземляр класса ответственного за мониторинг событий
             KeyPressEventHandler handler = new( );
             //подписываемся на событие ввода символа
@@ -84,10 +74,13 @@ namespace Calculator_v02
             {//вычисление и вывод результата
                 Output( );
                 Line = "";
-            }else if ( e.KeyInfo.Key == ConsoleKey.Delete )
+            } else if ( e.KeyInfo.Key == ConsoleKey.Delete )
             {//получение предыдущего результата
                 if ( stack.Count > 0 )
-                    Console.WriteLine( stack.Pop( ) );
+                {
+                    var tuple = stack.Pop();
+                    Console.WriteLine( $"{tuple.Item1} = {tuple.Item2}  {tuple.Item3}" );
+                }
             }
         }
 
@@ -103,17 +96,17 @@ namespace Calculator_v02
                 switch ( lastOperator )
                 {
                     case "+":
-                    return Addition( val1 , val2 );
+                    return checked(Addition( val1 , val2 ));
                     case "-":
-                    return Subtraction( val1 , val2 );
+                    return checked(Subtraction( val1 , val2 ));
                     case "*":
-                    return Multiplication( val1 , val2 );
+                    return checked(Multiplication( val1 , val2 ));
                     case "/":
-                    return Division( val1 , val2 );
+                    return checked(Division( val1 , val2 ));
                 }
             } else
             {
-                Console.WriteLine( "Ошибка ввода. Повторите." );
+                throw new InputException( "Ошибка ввода. Повторите.\n" );
             }
             return 0;
         }
@@ -148,7 +141,7 @@ namespace Calculator_v02
             }
             //заполняем массив числами и знаками из строки
             string[ ] numbers = Regex.Split( line , @"([-+*/])" );
-            for ( int i=0 ;i<numbers.Length ;i++ )
+            for ( int i = 0 ; i < numbers.Length ; i++ )
             {
                 var ch = numbers[ i ];
                 if ( ch == "-" || ch == "+" || ch == "" )
@@ -158,7 +151,7 @@ namespace Calculator_v02
                         lastOperator = ch;
 
                     //знак текущего числа
-                    if ( !Decimal.TryParse( numbers[i+1], out _) )
+                    if ( !Decimal.TryParse( numbers[ i + 1 ] , out _ ) )
                     {
                         isNegative = numbers[ i + 1 ] == "-";
                     }
@@ -196,9 +189,35 @@ namespace Calculator_v02
         /// </summary>
         private void Output ( )
         {
-            stack.Push( Calculate( Line ) );
-            Console.Write( $" = {stack.Peek()} " );
-            Console.WriteLine( );
+            string message = "";
+            decimal result = 0;
+            try
+            {
+                result = Calculate( Line );
+                Console.Write( $" = {result} " );
+                Console.WriteLine( );
+
+            } catch(InputException e )
+            {
+                message = e.Message;
+                Console.WriteLine( $"\n{e.Message}" );
+            }
+            catch ( OverflowException e )
+            {
+                message = e.Message;
+                Console.WriteLine( $"\n{e.Message}" );
+            } catch ( DivideByZeroException e )
+            {
+                message = e.Message;
+                Console.WriteLine( $"\n{e.Message}" );
+            } catch ( Exception e )
+            {
+                message = e.Message;
+                Console.WriteLine( $"\n{e.Message}" );
+            } finally
+            {
+                stack.Push( new Tuple<string,decimal,string>( Line , result , message ) );
+            }
         }
 
     }
