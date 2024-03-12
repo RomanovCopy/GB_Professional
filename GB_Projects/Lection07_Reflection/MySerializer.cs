@@ -49,7 +49,7 @@ namespace Lection07_Reflection
         /// <summary>
         /// преобразование строки к обобщеному типу
         /// </summary>
-        /// <typeparam name="T"> тип к которому происходит приведение</typeparam>
+        /// <typeparam name="T"> тип к которому происходит приведение(при этом T должен иметь конструктор по умолчанию)</typeparam>
         /// <param name="str">строка содержащая сериализованное свойство/поле</param>
         /// <returns></returns>
         public static T StringToObject<T> ( string str ) where T : new()
