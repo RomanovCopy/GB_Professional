@@ -65,17 +65,25 @@ namespace Lection07_Reflection
                     var propName = parts[ 0 ];
                     var valueStr = parts[ 1 ];
 
-                    foreach ( var member in type.GetMembers( BindingFlags.Public | BindingFlags.Instance ) )
+                    //массив полей и свойств в типе
+                    var members = type.GetMembers( BindingFlags.Public | BindingFlags.Instance );
+
+                    foreach ( var member in  members)
                     {
-                        var customNameAttr = member.GetCustomAttribute<CustomNameAttribute>( );
-                        if ( customNameAttr != null && customNameAttr.Name == propName )
+                        //аттрибут заданного типа
+                        var attr = member.GetCustomAttribute<CustomNameAttribute>( );
+                        if ( attr != null && attr.Name == propName )
                         {
-                            object value = Convert.ChangeType( valueStr , ( ( FieldInfo )member ).FieldType );
+                            //тип поля/свойства
+                            var currentType = (( FieldInfo )member ).FieldType ;
+                            //получаем из строки заданный тип
+                            object value = Convert.ChangeType( valueStr , currentType );
+                            //установка значения value в поле или свойство obj
                             if ( member.MemberType == MemberTypes.Field )
-                            {
+                            {//тип является полем
                                 ( ( FieldInfo )member ).SetValue( obj , value );
                             } else if ( member.MemberType == MemberTypes.Property )
-                            {
+                            {//тип является свойством
                                 ( ( PropertyInfo )member ).SetValue( obj , value );
                             }
                             break;
