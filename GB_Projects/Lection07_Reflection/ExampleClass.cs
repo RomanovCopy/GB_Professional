@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GB_Projects
+namespace Lection07_Reflection
 {
-    internal class Program
+    public class MyClass
     {
-        static void Main(string[] args)
-        {
-        }
+        [CustomName( "CustomFieldName" )]
+        public int I = 0;
     }
 }
