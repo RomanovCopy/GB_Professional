@@ -9,15 +9,24 @@ namespace Lection07_Reflection
 {
     public class MySerializer
     {
+        /// <summary>
+        /// преобразование объекта в строку(сериализация)
+        /// </summary>
+        /// <param name="obj">преобразуемый объект</param>
+        /// <returns></returns>
         public static string ObjectToString ( object obj )
         {
+            //тип объекта и все его поля и свойства
             var type = obj.GetType( );
             var members = type.GetMembers( BindingFlags.Public | BindingFlags.Instance );
+            
             var keyValuePairs = new List<string>( );
 
             foreach ( var member in members )
             {
+                //поиск аттрибута
                 var customNameAttr = member.GetCustomAttribute<CustomNameAttribute>( );
+                //обработка поля/свойства помеченного атрибутом
                 if ( customNameAttr != null )
                 {
                     object? value;
