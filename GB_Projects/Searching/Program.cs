@@ -21,6 +21,10 @@ namespace Searching
                     //ячеек в массиве args. Соединяем все последующие элементы в одну строку.
                     var text = String.Join( ' ' , args , 2 , args.Length - 2 );
                     Search( path , ext , text );
+                } else
+                {
+                    Console.WriteLine( "Неверные параметры..." );
+                    return;
                 }
                 Console.WriteLine( "Программа успешно завершена." );
 
