@@ -2,8 +2,7 @@
   "profiles": {
     "Searching": {
       "commandName": "Project",
-      "commandLineArgs": "  txt Romanov",
-      "workingDirectory": "D:\\aaa"
+      "commandLineArgs": " D:\\aaa txt Romanov"
     }
   }
 }

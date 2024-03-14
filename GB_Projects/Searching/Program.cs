@@ -11,15 +11,15 @@ namespace Searching
                 if ( args.Length > 1 )
                 {
                     //директория запуска приложения
-                    var path = Directory.GetCurrentDirectory( );
+                    var path = args[ 0 ];
                     //заданное расширение
-                    var ext = args[ 0 ];
+                    var ext = args[ 1 ];
                     //коррекция введеного расширения
                     if ( !ext.StartsWith( '.' ) )
-                        ext = $".{args[ 0 ]}";
+                        ext = $".{args[ 1 ]}";
                     //в тексте могут быть пробелы и следовательно он займет несколько
                     //ячеек в массиве args. Соединяем все последующие элементы в одну строку.
-                    var text = String.Join( ' ' , args , 1 , args.Length - 1 );
+                    var text = String.Join( ' ' , args , 2 , args.Length - 2 );
                     Search( path , ext , text );
                 }
                 Console.WriteLine( "Программа успешно завершена." );
