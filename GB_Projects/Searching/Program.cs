@@ -8,7 +8,7 @@ namespace Searching
         {
             try
             {
-                if ( args.Length > 1 )
+                if ( args.Length > 2 )
                 {
                     //директория запуска приложения
                     var path = args[ 0 ];
