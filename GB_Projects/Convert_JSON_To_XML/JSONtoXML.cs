@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GB_Projects
+namespace Convert_JSON_To_XML
 {
-    internal class Program
+    internal class JSONtoXML
     {
-        static void Main(string[] args)
-        {
-        }
+
     }
 }
