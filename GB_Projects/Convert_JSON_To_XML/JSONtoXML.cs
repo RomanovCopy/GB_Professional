@@ -14,21 +14,19 @@ namespace Convert_JSON_To_XML
 
         public JSONtoXML ( string json )
         {
-            // Создаем новый XmlDocument для представления XML документа
             var doc = new XmlDocument( );
-            // Создаем корневой элемент для XML документа
             var rootNode = doc.AppendChild( doc.CreateElement( "Person" ) );
             if ( rootNode != null )
-            {   // Парсим JSON-строку в JsonDocument
+            {   
                 JsonDocument jsonDoc = JsonDocument.Parse( json );
-                // Вызываем функцию конвертации JSON в XML
+                
                 ConvertJsonToXml( jsonDoc.RootElement , rootNode );
             }
             //форматированный вывод в консоль
             XmlWriterSettings settings = new( )
             {
-                Indent = true , // Включаем форматирование с отступами
-                IndentChars = "\t" // Устанавливаем символ отступа - табуляция
+                Indent = true , 
+                IndentChars = "\t" 
             };
             using XmlWriter writer = XmlWriter.Create( Console.Out , settings );
             doc.Save( writer );
