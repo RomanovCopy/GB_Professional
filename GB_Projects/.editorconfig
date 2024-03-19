@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# IDE0063: Использовать простой оператор using
+dotnet_diagnostic.IDE0063.severity = none
+
+# CA1822: Пометьте члены как статические
+dotnet_diagnostic.CA1822.severity = none
