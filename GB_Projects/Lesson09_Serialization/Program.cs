@@ -129,7 +129,7 @@ namespace Lesson09_Serialization
 
     }
 
-    public class WatherInfo
+    public class WeatherInfo
     {
         public DateTime Time { get; set; }
         public double Temperature { get; set; }
@@ -138,10 +138,10 @@ namespace Lesson09_Serialization
         public int Winddirection { get; set; }
     }
 
-    public class WatherData
+    public class WeatherData
     {
-        public WatherInfo Current { get; set; }
-        public List<WatherInfo> History { get; set; }
+        public WeatherInfo Current { get; set; }
+        public List<WeatherInfo> History { get; set; }
     }
 
 
