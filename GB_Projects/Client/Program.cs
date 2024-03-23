@@ -1,31 +1,22 @@
-﻿using System.Net;
-using System.Net.Sockets;
-using System.Text;
-
-namespace Client
+﻿namespace Client
 {
     internal class Program
     {
-        static void Main ( string[ ] args )
+        static void Main (  )
         {
-            MyClient( "127.0.0.1" , 12345 );
-        }
+            ClientHandler clientHandler = new ( );
 
-        private static void MyClient ( string ip , int port )
-        {
-            using ( Socket client = new( AddressFamily.InterNetwork , SocketType.Stream , ProtocolType.Tcp ) )
+            string? messageText;
+            do
             {
-                var remoteEndPoint = new IPEndPoint( IPAddress.Parse( ip ) , port );
-                Console.WriteLine("Подключение");
-                client.Connect( remoteEndPoint );
-                byte[ ] bytes = Encoding.UTF8.GetBytes( "Привет! Мир!" );
-                Console.WriteLine("Подключено!!!");
-                if(client.Send(bytes)==bytes.Length)
-                    Console.WriteLine("Сообщение отправлено...");
-                else
-                    Console.WriteLine("Ошибка при попытке отправки сообщения.");
+                Console.Clear( );
+                Console.WriteLine( "Введите текст : " );
+                messageText = Console.ReadLine( );
             }
-        }
+            while ( string.IsNullOrEmpty( messageText ) );
 
+            clientHandler.SendMessage( "127.0.0.1" , 1234 , "Client" , messageText );
+
+        }
     }
 }
