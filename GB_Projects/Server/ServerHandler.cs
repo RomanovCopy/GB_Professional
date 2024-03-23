@@ -10,7 +10,7 @@ using Data;
 
 namespace Data
 {
-    internal class ServerHandler ( int port )
+    internal class ServerHandler 
     {
         public void AwaitMessage ( )
         {

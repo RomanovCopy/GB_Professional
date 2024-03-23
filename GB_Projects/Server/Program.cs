@@ -6,7 +6,7 @@
         {
             Console.WriteLine( "Сервер ожидает сообщение от Client..." );
 
-            ServerHandler serverHandler = new( 1234 );
+            ServerHandler serverHandler = new( );
 
             while ( true )
             {
