@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GB_Projects
+namespace Client011
 {
-    internal class Program
+    internal class ClientHandler
     {
-        static void Main(string[] args)
-        {
-        }
     }
 }
