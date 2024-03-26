@@ -1,4 +1,6 @@
-﻿using Data011;
+﻿using System.Security.Claims;
+
+using Data011;
 
 namespace Client011
 {
@@ -6,7 +8,13 @@ namespace Client011
     {
         static void Main ( string[ ] args )
         {
-            var a = new Message( );
+            Thread thread = new Thread( CreateClient );
+            thread.Start( );
+        }
+
+        private static void CreateClient ( )
+        {
+            ClientHandler clientHandler = new ClientHandler( "127.0.0.1" , 1234 );
         }
     }
 }
