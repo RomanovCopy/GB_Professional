@@ -18,43 +18,68 @@ namespace Client011
         {
             this.ip = ip;
             this.port = port;
-
-            while ( true )
-            {
-                Console.WriteLine( "Закрыть чат - \" Exit \"" );
-                string? text = "";
-                if ( ( text = Console.ReadLine( )?.Trim( ).ToLower( ) ) == "exit" )
-                {
-                    break;
-                }
-                Message message = new Message( )
-                {
-                    DateTime = DateTime.Now ,
-                    NickNameFrom = "Client" ,
-                    NickNameTo = "Server" ,
-                    Text = text
-                };
-                SendMessage( message );
-            }
-
-
+            new Thread( SendMessage ).Start();
         }
 
-        private void SendMessage ( Message message )
+        private void SendMessage ( )
         {
-            string json = message.SerializeMessageToJson( );
-            var bytes = Encoding.UTF8.GetBytes( json );
-            using ( var client = new UdpClient( ) )
+            bool exit = false;
+            using ( var client = new UdpClient( 6666 ) )
             {
-                var ipEndPoint = new IPEndPoint( IPAddress.Parse(ip), port );
-                int lengthMessage = client.Send( bytes , bytes.Length, ipEndPoint );
-                if( lengthMessage == bytes.Length )
+                while ( !exit )
                 {
-                    Console.WriteLine("Сообщение отправлено.\nОжидаю подтверждения:\n");
+                    Console.WriteLine( "Закрыть чат - \" Exit \"" );
+                    string? text = Console.ReadLine( );
+                    if ( !( exit = text?.Trim( ).ToLower( ) == "exit" ) )
+                    {
+                        Message message = new Message( )
+                        {
+                            DateTime = DateTime.Now ,
+                            NickNameFrom = "Client" ,
+                            NickNameTo = "Server" ,
+                            Text = text
+                        };
+                        string json = message.SerializeMessageToJson( );
+                        var bytes = Encoding.UTF8.GetBytes( json );
+                        var ipEndPoint = new IPEndPoint( IPAddress.Parse( ip ) , port );
+                        client.Connect( ipEndPoint );
+                        int lengthMessage = client.Send( bytes , bytes.Length );
+                        if ( lengthMessage == bytes.Length )
+                        {
+                            Console.WriteLine( "Сообщение отправлено.\nОжидаю подтверждения:\n" );
+                            bool ready = false;
+                            var thread = new Thread( ( ) => ReceiveMessage( client , ipEndPoint , out ready ) );
+                            thread.Start( );
+                            thread.Join( 6000 );
+                            if ( !ready )
+                            {
+                                Console.WriteLine( "Время ожидания ответа от сервера истекло." );
+                            }
+                        }
+                    }
                 }
+
             }
         }
 
+        private void ReceiveMessage ( UdpClient udpClient , IPEndPoint endPoint , out bool ready )
+        {
+            try
+            {
+                udpClient.Client.ReceiveTimeout = 5000;
+                byte[ ] bytes = udpClient.Receive( ref endPoint );
+                if ( bytes != null )
+                {
+                    string json = Encoding.UTF8.GetString( bytes );
+                    var message = Message.DeserializeFromJsonToMessage( json );
+                    message?.PrintMessage( );
+                }
+                ready = true;
 
+            } catch
+            {
+                ready = false;
+            }
+        }
     }
 }

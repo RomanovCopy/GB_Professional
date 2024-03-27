@@ -12,13 +12,11 @@ namespace Server011
 {
     internal class ServerHandler
     {
-        private string ip;
         private int port;
         private bool exit { get; set; }
 
-        public ServerHandler ( string ip , int port )
+        public ServerHandler (  int port )
         {
-            this.ip = ip;
             this.port = port;
             while ( !exit )
             {
@@ -28,23 +26,43 @@ namespace Server011
 
         private Message? AwaitMessage ( )
         {
-            Console.WriteLine("Сервер ожидает сообщения.");
+            Console.WriteLine( "Сервер ожидает сообщения." );
             Message? message = null;
             using ( var server = new UdpClient( port ) )
             {
                 var endPoint = new IPEndPoint( IPAddress.Any , 0 );
                 if ( endPoint != null )
                 {
-                    var bytes = server.Receive( ref endPoint);
+                    var bytes = server.Receive( ref endPoint );
                     if ( bytes != null )
                     {
                         var stringMessage = Encoding.UTF8.GetString( bytes );
                         message = Message.DeserializeFromJsonToMessage( stringMessage );
                         message?.PrintMessage( );
+                        SendMessage( message , server , endPoint );
                     }
                 }
             }
             return message;
+        }
+
+        private void SendMessage ( Message? message , UdpClient client , IPEndPoint endPoint )
+        {
+            if ( message != null )
+            {
+                Message newMessage = new Message( )
+                {
+                    DateTime = DateTime.Now ,
+                    NickNameFrom = message.NickNameTo ,
+                    NickNameTo = message.NickNameFrom ,
+                    Text = $"Сообщение от {message.NickNameFrom} получено. "
+                };
+                string json = newMessage.SerializeMessageToJson( );
+                var bytes = Encoding.UTF8.GetBytes( json );
+                client.Send( bytes , bytes.Length, endPoint );
+
+            }
+
         }
     }
 }

@@ -8,8 +8,7 @@ namespace Client011
     {
         static void Main ( string[ ] args )
         {
-            Thread thread = new Thread( CreateClient );
-            thread.Start( );
+            CreateClient( );
         }
 
         private static void CreateClient ( )

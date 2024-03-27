@@ -12,7 +12,7 @@ namespace Server011
 
         private static void CreateServer()
         {
-            ServerHandler serverHandler = new ServerHandler( "127.0.0.1" , 1234 );
+            ServerHandler serverHandler = new ServerHandler( 1234 );
         }
     }
 }
