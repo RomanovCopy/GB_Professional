@@ -6,8 +6,7 @@ namespace Server011
     {
         static void Main ( string[ ] args )
         {
-            Thread thread = new Thread( CreateServer );
-            thread.Start( );
+            CreateServer( );
         }
 
         private static void CreateServer()
